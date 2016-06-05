@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir js
+cp node_modules/jquery/dist/jquery.min.js js/jquery.js

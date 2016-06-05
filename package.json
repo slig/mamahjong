@@ -1,0 +1,26 @@
+{
+  "name": "mamahjong",
+  "version": "0.0.0",
+  "description": "Mahjong for my mother",
+  "scripts": {
+    "postinstall": "util/copylibs",
+    "start": "http-server -a localhost -p 8000 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vanemiera/mamahjong.git"
+  },
+  "keywords": [
+    "mahjong",
+    "game"
+  ],
+  "author": "Philipp Westermann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Vanemiera/mamahjong/issues"
+  },
+  "dependencies": {
+    "http-server": "^0.6.1",
+    "jquery": "^2.2.4"
+  }
+}
