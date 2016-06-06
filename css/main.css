@@ -25,3 +25,20 @@ html, body { height: 100%; }
   height: 100%;
   background: rgb(86, 186, 105);
 }
+
+.tile {
+  background-color: beige;
+  width: 99px;
+  border-radius: 10px;
+  border-bottom: 5px solid gray;
+  border-right: 5px solid gray;
+  position: absolute;
+}
+
+.tile:hover {
+  background-color: bisque;
+}
+
+.selected {
+  background-color: lightblue;
+}
