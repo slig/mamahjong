@@ -30,7 +30,8 @@ html, body { height: 100%; }
 
 .tile {
   background-color: beige;
-  width: 99px;
+  background-image: url('../img/test-tile.svg');
+  background-size: 100% 100%;
   border-radius: 10px;
   border-bottom: 5px solid gray;
   border-right: 5px solid gray;

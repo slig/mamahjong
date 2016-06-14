@@ -3,7 +3,7 @@ var game = {layouts: {}};
 //Defaults
 game.boardWidth = 800;
 game.boardHeight = 600;
-game.tileAspectRatio = 1.2
+game.tileAspectRatio = 1.4;
 
 
 game.layouts.turtle = {
@@ -112,7 +112,8 @@ game.tiles = [];
 
 game.createTile = function(x, y, z) {
   var newTile = {x:x, y:y, z:z};
-  newTile.element = $('<img class="tile" src="img/test-tile.svg">');
+  newTile.element = $('<div class="tile"></div>');
+  newTile.element.css('z-index', (y + x*10 + z*100));
   $('.board').append(newTile.element);
   game.tiles.push(newTile);
   return (newTile);
@@ -137,9 +138,9 @@ game.updateTiles = function() {
 
   if (game.height/game.gridHeight > game.width/game.gridWidth*game.tileAspectRatio) {
     game.tileWidth = (game.width) / game.gridWidth;
-    game.tileHeight = (game.width*game.tileAspectRatio) / game.gridHeight;
+    game.tileHeight = (game.width*game.tileAspectRatio) / game.gridWidth;
   } else {
-    game.tileWidth = (game.height/game.tileAspectRatio) / game.gridWidth;
+    game.tileWidth = (game.height/game.tileAspectRatio) / game.gridHeight;
     game.tileHeight = (game.height) / game.gridHeight;
   }
 
