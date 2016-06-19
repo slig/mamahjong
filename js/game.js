@@ -110,9 +110,9 @@ game.gridHeight = game.selectedLayout.gridHeight;
 
 game.tiles = [];
 
-game.createTile = function(x, y, z) {
-  var newTile = {x:x, y:y, z:z};
-  newTile.element = $('<div class="tile"></div>');
+game.createTile = function(x, y, z, type) {
+  var newTile = {x:x, y:y, z:z, type:type};
+  newTile.element = $('<div class="tile">'+type+'</div>');
   newTile.element.css('z-index', (y + x*10 + z*100));
   $('.board').append(newTile.element);
   game.tiles.push(newTile);
@@ -120,11 +120,28 @@ game.createTile = function(x, y, z) {
 };
 
 game.readSelectedLayout = function() {
-  for (var i=0; i<game.selectedLayout.tile_layers.length; i++) {
+  types = [];
+  for (var i=0; i<36; i++) {
+    types[i] = 4;
+  }
+  tLength = types.length;
+  var type = 0;
+  var tileCount = 0;
+
+  for (i=0; i<game.selectedLayout.tile_layers.length; i++) {
     for (var j=0; j<game.selectedLayout.tile_layers[i].length; j++) {
       for (var k=0; k<game.selectedLayout.tile_layers[i][j].length; k++) {
         if (game.selectedLayout.tile_layers[i][j][k] === '#') {
-          game.createTile(k, j, i);
+          if (tileCount == 144) {
+            console.error("Too many tiles in layout");
+            return;
+          }
+          do {
+            type = Math.floor(Math.random()*tLength);
+          } while (types[type]===0);
+          types[type]--;
+          game.createTile(k, j, i, type);
+          tileCount++;
         }
       }
     }
