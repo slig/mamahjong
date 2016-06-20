@@ -8,98 +8,98 @@ game.tileAspectRatio = 1.4;
 
 game.layouts.turtle = {
   tile_size: [2,2],
-  gridWidth: 28,
+  gridWidth: 30,
   gridHeight: 16,
   tile_layers: [
     [
-      "  #*#*#*#*#*#*#*#*#*#*#*#*  \n",
-      "  ************************  \n",
-      "      #*#*#*#*#*#*#*#*      \n",
-      "      ****************      \n",
-      "    #*#*#*#*#*#*#*#*#*#*    \n",
-      "    ********************    \n",
-      "  #*#*#*#*#*#*#*#*#*#*#*#*  \n",
-      "#*************************#*\n",
-      "**#*#*#*#*#*#*#*#*#*#*#*#***\n",
-      "  ************************  \n",
-      "    #*#*#*#*#*#*#*#*#*#*    \n",
-      "    ********************    \n",
-      "      #*#*#*#*#*#*#*#*      \n",
-      "      ****************      \n",
-      "  #*#*#*#*#*#*#*#*#*#*#*#*  \n",
-      "  ************************  \n"
+      "  #*#*#*#*#*#*#*#*#*#*#*#*    \n",
+      "  ************************    \n",
+      "      #*#*#*#*#*#*#*#*        \n",
+      "      ****************        \n",
+      "    #*#*#*#*#*#*#*#*#*#*      \n",
+      "    ********************      \n",
+      "  #*#*#*#*#*#*#*#*#*#*#*#*    \n",
+      "#*************************#*#*\n",
+      "**#*#*#*#*#*#*#*#*#*#*#*#*****\n",
+      "  ************************    \n",
+      "    #*#*#*#*#*#*#*#*#*#*      \n",
+      "    ********************      \n",
+      "      #*#*#*#*#*#*#*#*        \n",
+      "      ****************        \n",
+      "  #*#*#*#*#*#*#*#*#*#*#*#*    \n",
+      "  ************************    \n"
     ],
     [
-      "                            \n",
-      "                            \n",
-      "        #*#*#*#*#*#*        \n",
-      "        ************        \n",
-      "        #*#*#*#*#*#*        \n",
-      "        ************        \n",
-      "        #*#*#*#*#*#*        \n",
-      "        ************        \n",
-      "        #*#*#*#*#*#*        \n",
-      "        ************        \n",
-      "        #*#*#*#*#*#*        \n",
-      "        ************        \n",
-      "        #*#*#*#*#*#*        \n",
-      "        ************        \n",
-      "                            \n",
-      "                            \n"
+      "                              \n",
+      "                              \n",
+      "        #*#*#*#*#*#*          \n",
+      "        ************          \n",
+      "        #*#*#*#*#*#*          \n",
+      "        ************          \n",
+      "        #*#*#*#*#*#*          \n",
+      "        ************          \n",
+      "        #*#*#*#*#*#*          \n",
+      "        ************          \n",
+      "        #*#*#*#*#*#*          \n",
+      "        ************          \n",
+      "        #*#*#*#*#*#*          \n",
+      "        ************          \n",
+      "                              \n",
+      "                              \n"
     ],
     [
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "          #*#*#*#*          \n",
-      "          ********          \n",
-      "          #*#*#*#*          \n",
-      "          ********          \n",
-      "          #*#*#*#*          \n",
-      "          ********          \n",
-      "          #*#*#*#*          \n",
-      "          ********          \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n"
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "          #*#*#*#*            \n",
+      "          ********            \n",
+      "          #*#*#*#*            \n",
+      "          ********            \n",
+      "          #*#*#*#*            \n",
+      "          ********            \n",
+      "          #*#*#*#*            \n",
+      "          ********            \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n"
     ],
     [
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "            #*#*            \n",
-      "            ****            \n",
-      "            #*#*            \n",
-      "            ****            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n"
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "            #*#*              \n",
+      "            ****              \n",
+      "            #*#*              \n",
+      "            ****              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n"
     ],
     [
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "             #*             \n",
-      "             **             \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n",
-      "                            \n"
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "             #*               \n",
+      "             **               \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n",
+      "                              \n"
     ]
   ]
 };
@@ -111,15 +111,13 @@ game.gridHeight = game.selectedLayout.gridHeight;
 game.onTileClick = function(event){
   var id = parseInt(event.target.id);
   var tile = game.tiles[id];
-  console.log('ID: ' + id);
-  console.log('Type: ' + game.tiles[id].type);
   if (game.markedTile) {
-    if (game.markedTile.type == tile.type) {
+    if ((game.markedTile.type == tile.type) && (game.markedTile.id != tile.id)) {
       game.markedTile.element.remove();
       game.markedTile = null;
       tile.element.remove();
       game.tileCount -= 2;
-      if (game.tileCount === 0) {
+      if (game.tileCount <= 0) {
         alert('Game won!');
         game.readSelectedLayout();
       }
@@ -135,12 +133,12 @@ game.onTileClick = function(event){
 
 game.createTile = function(x, y, z, type) {
   var newTile = {x:x, y:y, z:z, type:type};
-  var numTiles = game.tiles.length;
-  newTile.element = $('<div id="'+numTiles+'" class="tile">'+type+'</div>');
+  newTile.id = game.tiles.length;
+  newTile.element = $('<div id="'+newTile.id+'" class="tile">'+type+'</div>');
   newTile.element.css('z-index', (y + x*10 + z*100));
   newTile.element.on('click', game.onTileClick);
   $('.board').append(newTile.element);
-  for (var i=0; i<numTiles; i++) {
+  for (var i=0; i<newTile.id; i++) {
     //Check left neighbours (x - tilesize)
     //Check right neighbours (x - tilesize)
     //Check bottom neighbours
