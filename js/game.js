@@ -111,6 +111,12 @@ game.gridHeight = game.selectedLayout.gridHeight;
 game.onTileClick = function(event){
   var id = parseInt(event.target.id);
   var tile = game.tiles[id];
+
+  //check if tile is free
+  if (!tile.free) {
+    return;
+  }
+
   if (game.markedTile) {
     if ((game.markedTile.type == tile.type) && (game.markedTile.id != tile.id)) {
       game.markedTile.element.remove();
@@ -133,15 +139,49 @@ game.onTileClick = function(event){
 
 game.createTile = function(x, y, z, type) {
   var newTile = {x:x, y:y, z:z, type:type};
+  var xd = game.selectedLayout.tile_size[0];
+  var yd = game.selectedLayout.tile_size[1];
   newTile.id = game.tiles.length;
+  newTile.topTiles = {count:0};
+  newTile.bottomTiles = {count:0};
+  newTile.leftTiles = {count:0};
+  newTile.rightTiles = {count:0};
   newTile.element = $('<div id="'+newTile.id+'" class="tile">'+type+'</div>');
   newTile.element.css('z-index', (y + x*10 + z*100));
   newTile.element.on('click', game.onTileClick);
   $('.board').append(newTile.element);
   for (var i=0; i<newTile.id; i++) {
-    //Check left neighbours (x - tilesize)
-    //Check right neighbours (x - tilesize)
+    //Check left neighbours
+    if (game.tiles[i].z===z &&
+        game.tiles[i].x===x-xd &&
+        y+yd>game.tiles[i].y &&
+        game.tiles[i].y>y-yd){
+      newTile.leftTiles[i] = game.tiles[i];
+      newTile.leftTiles.count++;
+      game.tiles[i].rightTiles[newTile.id] = newTile;
+      game.tiles[i].rightTiles.count++;
+    }
+    //Check right neighbours
+    if (game.tiles[i].z===z &&
+        game.tiles[i].x==x+xd &&
+        y+yd>game.tiles[i].y &&
+        game.tiles[i].y>y-yd){
+      newTile.rightTiles[i] = game.tiles[i];
+      newTile.rightTiles.count++;
+      game.tiles[i].leftTiles[newTile.id] = newTile;
+      game.tiles[i].leftTiles.count++;
+    }
     //Check bottom neighbours
+    if (game.tiles[i].z===z-1 &&
+        x+xd>game.tiles[i].x &&
+        game.tiles[i].x>x-xd &&
+        y+yd>game.tiles[i].y &&
+        game.tiles[i].y>y-yd){
+      newTile.bottomTiles[i] = game.tiles[i];
+      newTile.bottomTiles.count++;
+      game.tiles[i].topTiles[newTile.id] = newTile;
+      game.tiles[i].topTiles.count++;
+    }
   }
   game.tiles.push(newTile);
   return (newTile);
@@ -212,6 +252,22 @@ game.updateTiles = function() {
   }
 };
 
+game.updateFreeTiles = function() {
+  var tileCount = game.tiles.length;
+  var tile = {};
+  for (var i=0; i<tileCount; i++) {
+    tile = game.tiles[i];
+    if ((tile.leftTiles.count>0 && tile.rightTiles.count>0) || tile.topTiles.count>0) {
+      tile.free = false;
+      tile.element.css('background-blend-mode', 'normal');
+    } else {
+      tile.free = true;
+      tile.element.css('background-blend-mode', 'exclusion');
+    }
+  }
+
+};
+
 $(document).ready(function(){
   $(window).on('resize', function() {
     game.updateTiles();
@@ -219,5 +275,6 @@ $(document).ready(function(){
 
   game.readSelectedLayout();
   game.updateTiles();
+  game.updateFreeTiles();
 
 });
