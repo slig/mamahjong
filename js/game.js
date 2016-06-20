@@ -108,6 +108,37 @@ game.selectedLayout = game.layouts.turtle;
 game.gridWidth = game.selectedLayout.gridWidth;
 game.gridHeight = game.selectedLayout.gridHeight;
 
+game.detachTile = function(tile) {
+  var id = tile.id;
+  for (var key in tile.leftTiles) {
+    if (key === 'count') {continue;}
+    //tile.leftTiles[key].rightTiles[id] = null;
+    tile.leftTiles[key].rightTiles.count--;
+    game.updateTileState(tile.leftTiles[key]);
+    //tile.leftTiles[key] = null;
+    tile.leftTiles.count--;
+    game.updateTileState(tile);
+  }
+  for (key in tile.rightTiles) {
+    if (key === 'count') {continue;}
+    //tile.rightTiles[key].leftTiles[id] = null;
+    tile.rightTiles[key].leftTiles.count--;
+    game.updateTileState(tile.rightTiles[key]);
+    //tile.rightTiles[key] = null;
+    tile.rightTiles.count--;
+    game.updateTileState(tile);
+  }
+  for (key in tile.bottomTiles) {
+    if (key === 'count') {continue;}
+    //tile.bottomTiles[key].topTiles[id] = null;
+    tile.bottomTiles[key].topTiles.count--;
+    game.updateTileState(tile.bottomTiles[key]);
+    //tile.bottomTiles[key] = null;
+    tile.bottomTiles.count--;
+    game.updateTileState(tile);
+  }
+};
+
 game.onTileClick = function(event){
   var id = parseInt(event.target.id);
   var tile = game.tiles[id];
@@ -119,8 +150,10 @@ game.onTileClick = function(event){
 
   if (game.markedTile) {
     if ((game.markedTile.type == tile.type) && (game.markedTile.id != tile.id)) {
+      game.detachTile(game.markedTile);
       game.markedTile.element.remove();
       game.markedTile = null;
+      game.detachTile(tile);
       tile.element.remove();
       game.tileCount -= 2;
       if (game.tileCount <= 0) {
@@ -252,20 +285,23 @@ game.updateTiles = function() {
   }
 };
 
+game.updateTileState = function(tile) {
+  if ((tile.leftTiles.count>0 && tile.rightTiles.count>0) || tile.topTiles.count>0) {
+    tile.free = false;
+    tile.element.css('background-blend-mode', 'normal');
+  } else {
+    tile.free = true;
+    tile.element.css('background-blend-mode', 'exclusion');
+  }
+};
+
 game.updateFreeTiles = function() {
   var tileCount = game.tiles.length;
   var tile = {};
   for (var i=0; i<tileCount; i++) {
     tile = game.tiles[i];
-    if ((tile.leftTiles.count>0 && tile.rightTiles.count>0) || tile.topTiles.count>0) {
-      tile.free = false;
-      tile.element.css('background-blend-mode', 'normal');
-    } else {
-      tile.free = true;
-      tile.element.css('background-blend-mode', 'exclusion');
-    }
+    game.updateTileState(tile);
   }
-
 };
 
 $(document).ready(function(){
