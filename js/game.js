@@ -108,18 +108,49 @@ game.selectedLayout = game.layouts.turtle;
 game.gridWidth = game.selectedLayout.gridWidth;
 game.gridHeight = game.selectedLayout.gridHeight;
 
-game.tiles = [];
+game.onTileClick = function(event){
+  var id = parseInt(event.target.id);
+  var tile = game.tiles[id];
+  console.log('ID: ' + id);
+  console.log('Type: ' + game.tiles[id].type);
+  if (game.markedTile) {
+    if (game.markedTile.type == tile.type) {
+      game.markedTile.element.remove();
+      game.markedTile = null;
+      tile.element.remove();
+      game.tileCount -= 2;
+      if (game.tileCount === 0) {
+        alert('Game won!');
+        game.readSelectedLayout();
+      }
+    } else {
+      game.markedTile.element.css('background-color', '');
+      game.markedTile = null;
+    }
+  } else {
+    game.markedTile = tile;
+    tile.element.css('background-color', 'lightblue');
+  }
+};
 
 game.createTile = function(x, y, z, type) {
   var newTile = {x:x, y:y, z:z, type:type};
-  newTile.element = $('<div class="tile">'+type+'</div>');
+  var numTiles = game.tiles.length;
+  newTile.element = $('<div id="'+numTiles+'" class="tile">'+type+'</div>');
   newTile.element.css('z-index', (y + x*10 + z*100));
+  newTile.element.on('click', game.onTileClick);
   $('.board').append(newTile.element);
+  for (var i=0; i<numTiles; i++) {
+    //Check left neighbours (x - tilesize)
+    //Check right neighbours (x - tilesize)
+    //Check bottom neighbours
+  }
   game.tiles.push(newTile);
   return (newTile);
 };
 
 game.readSelectedLayout = function() {
+  game.tiles = [];
   types = [];
   for (var i=0; i<36; i++) {
     types[i] = 4;
@@ -146,6 +177,8 @@ game.readSelectedLayout = function() {
       }
     }
   }
+  game.tileCount = tileCount;
+  game.updateTiles();
 };
 
 game.updateTiles = function() {
