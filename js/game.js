@@ -3,7 +3,7 @@ var game = {layouts: {}};
 //Defaults
 game.boardWidth = 800;
 game.boardHeight = 600;
-game.tileAspectRatio = 1.4;
+game.tileAspectRatio = 1.3;
 
 
 game.layouts.turtle = {
@@ -181,6 +181,8 @@ game.createTile = function(x, y, z, type) {
   newTile.rightTiles = {count:0};
   newTile.element = $('<div id="'+newTile.id+'" class="tile">'+type+'</div>');
   newTile.element.css('z-index', (y + x*10 + z*100));
+  newTile.element.css('background-position-x', type%6*20 + '%');
+  newTile.element.css('background-position-y', Math.floor(type/6)*20 + '%');
   newTile.element.on('click', game.onTileClick);
   $('.board').append(newTile.element);
   for (var i=0; i<newTile.id; i++) {
@@ -288,10 +290,10 @@ game.updateTiles = function() {
 game.updateTileState = function(tile) {
   if ((tile.leftTiles.count>0 && tile.rightTiles.count>0) || tile.topTiles.count>0) {
     tile.free = false;
-    tile.element.css('background-blend-mode', 'normal');
+    tile.element.css('background-color', 'beige');
   } else {
     tile.free = true;
-    tile.element.css('background-blend-mode', 'exclusion');
+    tile.element.css('background-color', 'lightgray');
   }
 };
 
