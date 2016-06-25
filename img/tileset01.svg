@@ -16,8 +16,10 @@
    viewBox="0 0 180 234"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="tileset01.svg">
-  <defs>
+   sodipodi:docname="tileset01.svg"
+   id="svg4256">
+  <defs
+     id="defs4258">
     <linearGradient
        id="linearGradient4208"
        osb:paint="solid">
@@ -34,8 +36,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.959798"
-     inkscape:cx="54.85516"
-     inkscape:cy="199.05436"
+     inkscape:cx="86.954145"
+     inkscape:cy="156.77512"
      inkscape:document-units="px"
      showgrid="false"
      units="px"
@@ -43,11 +45,13 @@
      inkscape:showpageshadow="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1680"
-     inkscape:window-height="1026"
-     inkscape:window-x="1680"
+     inkscape:window-width="1366"
+     inkscape:window-height="744"
+     inkscape:window-x="0"
      inkscape:window-y="24"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="1"
+     id="namedview4262"
+     inkscape:current-layer="svg4256">
     <sodipodi:guide
        position="30,0"
        orientation="1,0"
@@ -109,11 +113,15 @@
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
   </sodipodi:namedview>
-  <metadata>
+  <metadata
+     id="metadata4274">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
-        <dc:title></dc:title>
+        <dc:title />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -497,5 +505,248 @@
        xlink:href="#path4226"
        y="0"
        x="0" />
+  </g>
+  <g
+     id="Tile_10"
+     transform="translate(89.903576,-157.07872)">
+    <text
+       transform="scale(1.0636556,0.94015394)"
+       sodipodi:linespacing="125%"
+       id="text4330"
+       y="243.23584"
+       x="3.368921"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2586956px;line-height:125%;font-family:UnBatang;-inkscape-font-specification:'UnBatang Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="243.23584"
+         x="3.368921"
+         id="tspan4332"
+         sodipodi:role="line">萬</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4334"
+       y="210.30612"
+       x="14.173089"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.04081726px;line-height:125%;font-family:unbatang;-inkscape-font-specification:'unbatang Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0e00ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="210.30612"
+         x="14.173089"
+         id="tspan4336"
+         sodipodi:role="line">一</tspan></text>
+  </g>
+  <g
+     transform="translate(119.95561,-157.07872)"
+     id="Tile_11">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2586956px;line-height:125%;font-family:UnBatang;-inkscape-font-specification:'UnBatang Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="3.368921"
+       y="243.23584"
+       id="text4355"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0636556,0.94015394)"><tspan
+         sodipodi:role="line"
+         id="tspan4357"
+         x="3.368921"
+         y="243.23584">萬</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.04081726px;line-height:125%;font-family:unbatang;-inkscape-font-specification:'unbatang Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="14.425627"
+       y="210.30612"
+       id="text4359"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4361"
+         x="14.425627"
+         y="210.30612">二</tspan></text>
+  </g>
+  <g
+     id="Tile_12"
+     transform="translate(150.76526,-157.07872)">
+    <text
+       transform="scale(1.0636556,0.94015394)"
+       sodipodi:linespacing="125%"
+       id="text4365"
+       y="243.23584"
+       x="3.368921"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2586956px;line-height:125%;font-family:UnBatang;-inkscape-font-specification:'UnBatang Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="243.23584"
+         x="3.368921"
+         id="tspan4367"
+         sodipodi:role="line">萬</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4369"
+       y="210.30612"
+       x="14.173089"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.04081726px;line-height:125%;font-family:unbatang;-inkscape-font-specification:'unbatang Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="210.30612"
+         x="14.173089"
+         id="tspan4371"
+         sodipodi:role="line">三</tspan></text>
+  </g>
+  <g
+     transform="translate(0.50506996,-117.68277)"
+     id="Tile_13">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2586956px;line-height:125%;font-family:UnBatang;-inkscape-font-specification:'UnBatang Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="3.368921"
+       y="243.23584"
+       id="text4375"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0636556,0.94015394)"><tspan
+         sodipodi:role="line"
+         id="tspan4377"
+         x="3.368921"
+         y="243.23584">萬</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.04081726px;line-height:125%;font-family:unbatang;-inkscape-font-specification:'unbatang Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="14.425627"
+       y="210.30612"
+       id="text4379"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4381"
+         x="14.425627"
+         y="210.30612">四</tspan></text>
+  </g>
+  <g
+     id="Tile_14"
+     transform="translate(31.062184,-117.68277)">
+    <text
+       transform="scale(1.0636556,0.94015394)"
+       sodipodi:linespacing="125%"
+       id="text4385"
+       y="243.23584"
+       x="3.368921"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2586956px;line-height:125%;font-family:UnBatang;-inkscape-font-specification:'UnBatang Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="243.23584"
+         x="3.368921"
+         id="tspan4387"
+         sodipodi:role="line">萬</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4389"
+       y="210.30612"
+       x="14.173089"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.04081726px;line-height:125%;font-family:unbatang;-inkscape-font-specification:'unbatang Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="210.30612"
+         x="14.173089"
+         id="tspan4391"
+         sodipodi:role="line">五</tspan></text>
+  </g>
+  <g
+     transform="translate(60.609146,-117.68277)"
+     id="Tile_15">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2586956px;line-height:125%;font-family:UnBatang;-inkscape-font-specification:'UnBatang Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="3.368921"
+       y="243.23584"
+       id="text4395"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0636556,0.94015394)"><tspan
+         sodipodi:role="line"
+         id="tspan4397"
+         x="3.368921"
+         y="243.23584">萬</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.04081726px;line-height:125%;font-family:unbatang;-inkscape-font-specification:'unbatang Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="14.173089"
+       y="210.30612"
+       id="text4399"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4401"
+         x="14.173089"
+         y="210.30612">六</tspan></text>
+  </g>
+  <g
+     id="Tile_16"
+     transform="translate(90.661184,-117.68277)">
+    <text
+       transform="scale(1.0636556,0.94015394)"
+       sodipodi:linespacing="125%"
+       id="text4405"
+       y="243.23584"
+       x="3.368921"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2586956px;line-height:125%;font-family:UnBatang;-inkscape-font-specification:'UnBatang Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="243.23584"
+         x="3.368921"
+         id="tspan4407"
+         sodipodi:role="line">萬</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4409"
+       y="210.30612"
+       x="14.173089"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.04081726px;line-height:125%;font-family:unbatang;-inkscape-font-specification:'unbatang Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="210.30612"
+         x="14.173089"
+         id="tspan4411"
+         sodipodi:role="line">七</tspan></text>
+  </g>
+  <g
+     transform="translate(120.20815,-117.68277)"
+     id="Tile_17">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2586956px;line-height:125%;font-family:UnBatang;-inkscape-font-specification:'UnBatang Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="3.368921"
+       y="243.23584"
+       id="text4415"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0636556,0.94015394)"><tspan
+         sodipodi:role="line"
+         id="tspan4417"
+         x="3.368921"
+         y="243.23584">萬</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.04081726px;line-height:125%;font-family:unbatang;-inkscape-font-specification:'unbatang Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="14.173089"
+       y="210.30612"
+       id="text4419"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4421"
+         x="14.173089"
+         y="210.30612">八</tspan></text>
+  </g>
+  <g
+     id="Tile_18"
+     transform="translate(150.51273,-117.68277)">
+    <text
+       transform="scale(1.0636556,0.94015394)"
+       sodipodi:linespacing="125%"
+       id="text4425"
+       y="243.23584"
+       x="3.368921"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2586956px;line-height:125%;font-family:UnBatang;-inkscape-font-specification:'UnBatang Bold';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="243.23584"
+         x="3.368921"
+         id="tspan4427"
+         sodipodi:role="line">萬</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4429"
+       y="210.30612"
+       x="14.173089"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.04081726px;line-height:125%;font-family:unbatang;-inkscape-font-specification:'unbatang Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="210.30612"
+         x="14.173089"
+         id="tspan4431"
+         sodipodi:role="line">九</tspan></text>
   </g>
 </svg>
