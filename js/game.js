@@ -112,28 +112,22 @@ game.detachTile = function(tile) {
   var id = tile.id;
   for (var key in tile.leftTiles) {
     if (key === 'count') {continue;}
-    //tile.leftTiles[key].rightTiles[id] = null;
     tile.leftTiles[key].rightTiles.count--;
     game.updateTileState(tile.leftTiles[key]);
-    //tile.leftTiles[key] = null;
     tile.leftTiles.count--;
     game.updateTileState(tile);
   }
   for (key in tile.rightTiles) {
     if (key === 'count') {continue;}
-    //tile.rightTiles[key].leftTiles[id] = null;
     tile.rightTiles[key].leftTiles.count--;
     game.updateTileState(tile.rightTiles[key]);
-    //tile.rightTiles[key] = null;
     tile.rightTiles.count--;
     game.updateTileState(tile);
   }
   for (key in tile.bottomTiles) {
     if (key === 'count') {continue;}
-    //tile.bottomTiles[key].topTiles[id] = null;
     tile.bottomTiles[key].topTiles.count--;
     game.updateTileState(tile.bottomTiles[key]);
-    //tile.bottomTiles[key] = null;
     tile.bottomTiles.count--;
     game.updateTileState(tile);
   }
@@ -143,7 +137,6 @@ game.onTileClick = function(event){
   var id = parseInt(event.target.id);
   var tile = game.tiles[id];
 
-  //check if tile is free
   if (!tile.free) {
     return;
   }
@@ -179,7 +172,7 @@ game.createTile = function(x, y, z, type) {
   newTile.bottomTiles = {count:0};
   newTile.leftTiles = {count:0};
   newTile.rightTiles = {count:0};
-  newTile.element = $('<div id="'+newTile.id+'" class="tile">'+type+'</div>');
+  newTile.element = $('<div id="'+newTile.id+'" class="tile"/>');
   newTile.element.css('z-index', (y + x*10 + z*100));
   newTile.element.css('background-position-x', type%6*20 + '%');
   newTile.element.css('background-position-y', Math.floor(type/6)*20 + '%');
