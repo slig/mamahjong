@@ -269,11 +269,13 @@ game.updateTiles = function() {
   allTiles.css('width', (game.tileWidth*game.selectedLayout.tile_size[0] - 1).toString() + "px");
   allTiles.css('height', (game.tileHeight*game.selectedLayout.tile_size[0] - 1).toString() + "px");
 
+  var borderThickness = game.tileWidth/4;
   for (var i=0; i< this.tiles.length; i++) {
-    game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(game.tileWidth/12) + offsetLeft).toString() + 'px');
-    game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(game.tileWidth/16)).toString() + 'px');
-    game.tiles[i].element.css('border-right', (game.tileWidth/8).toString() + 'px solid gray');
-    game.tiles[i].element.css('border-bottom', (game.tileWidth/8).toString() + 'px solid gray');
+
+    game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(borderThickness-1) + offsetLeft).toString() + 'px');
+    game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(borderThickness-1)).toString() + 'px');
+    game.tiles[i].element.css('border-right', borderThickness.toString() + 'px solid gray');
+    game.tiles[i].element.css('border-bottom', borderThickness.toString() + 'px solid gray');
     game.tiles[i].element.css('border-radius', (game.tileWidth/3).toString() + 'px');
 
 
@@ -283,10 +285,8 @@ game.updateTiles = function() {
 game.updateTileState = function(tile) {
   if ((tile.leftTiles.count>0 && tile.rightTiles.count>0) || tile.topTiles.count>0) {
     tile.free = false;
-    tile.element.css('background-color', 'beige');
   } else {
     tile.free = true;
-    tile.element.css('background-color', 'lightgray');
   }
 };
 
