@@ -36,11 +36,12 @@ html, body {
   background-color: beige;
   background-image: url('../img/tileset01.svg');
   background-size: 600% 600%;
-  border-radius: 10px;
-  border-bottom: 5px solid gray;
-  border-right: 5px solid gray;
   position: absolute;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  border-top: 1px solid gray;
+  border-left: 1px solid gray;
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  box-sizing: border-box;
 }
 
 .tile:hover {
@@ -49,4 +50,21 @@ html, body {
 
 .selected {
   background-color: lightblue;
+}
+
+.newGame {
+  background-color: lightblue;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  padding: 5px;
+  color: white;
+  font-family: monospace;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.newGame:hover {
+  background-color: blue;
 }

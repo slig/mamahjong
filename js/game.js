@@ -151,7 +151,7 @@ game.onTileClick = function(event){
       game.tileCount -= 2;
       if (game.tileCount <= 0) {
         alert('Game won!');
-        game.readSelectedLayout();
+        game.newGame();
       }
     } else {
       game.markedTile.element.css('background-color', '');
@@ -217,6 +217,7 @@ game.createTile = function(x, y, z, type) {
 
 game.readSelectedLayout = function() {
   game.tiles = [];
+  $('.tile').remove();
   types = [];
   for (var i=0; i<36; i++) {
     types[i] = 4;
@@ -266,19 +267,18 @@ game.updateTiles = function() {
   }
 
   var allTiles = $('.tile');
-  allTiles.css('width', (game.tileWidth*game.selectedLayout.tile_size[0] - 1).toString() + "px");
-  allTiles.css('height', (game.tileHeight*game.selectedLayout.tile_size[0] - 1).toString() + "px");
+  allTiles.css('width', (game.tileWidth*game.selectedLayout.tile_size[0]).toString() + "px");
+  allTiles.css('height', (game.tileHeight*game.selectedLayout.tile_size[0]).toString() + "px");
 
-  var borderThickness = game.tileWidth/4;
+  var borderThickness = game.tileWidth/3;
   for (var i=0; i< this.tiles.length; i++) {
-
-    game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(borderThickness-1) + offsetLeft).toString() + 'px');
-    game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(borderThickness-1)).toString() + 'px');
-    game.tiles[i].element.css('border-right', borderThickness.toString() + 'px solid gray');
-    game.tiles[i].element.css('border-bottom', borderThickness.toString() + 'px solid gray');
+    game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(borderThickness -1 ) + offsetLeft).toString() + 'px');
+    game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(borderThickness -1)).toString() + 'px');
     game.tiles[i].element.css('border-radius', (game.tileWidth/3).toString() + 'px');
-
-
+    game.tiles[i].element.css('border-radius', (game.tileWidth/3).toString() + 'px');
+    game.tiles[i].element.css('box-shadow', ('{0}px {0}px brown, {1}px {1}px gray'
+                                             .replace(/\{0\}/g, borderThickness/2)
+                                             .replace(/\{1\}/g, borderThickness)));
   }
 };
 
@@ -299,13 +299,19 @@ game.updateFreeTiles = function() {
   }
 };
 
+game.newGame = function() {
+  game.readSelectedLayout();
+  game.updateTiles();
+  game.updateFreeTiles();
+};
+
 $(document).ready(function(){
   $(window).on('resize', function() {
     game.updateTiles();
   });
+  $('.newGame').click(game.newGame);
 
-  game.readSelectedLayout();
+  game.newGame();
+
   game.updateTiles();
-  game.updateFreeTiles();
-
 });
