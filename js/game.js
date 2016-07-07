@@ -137,17 +137,45 @@ game.onTileClick = function(event){
   var id = parseInt(event.target.id);
   var tile = game.tiles[id];
 
-  if (!tile.free) {
+  if (!tile.free || game.locked) {
     return;
   }
 
+
   if (game.markedTile) {
     if ((game.markedTile.type == tile.type) && (game.markedTile.id != tile.id)) {
+      game.locked = true;
+
       game.detachTile(game.markedTile);
-      game.markedTile.element.remove();
-      game.markedTile = null;
+      game.markedTile.element.css({
+        'z-index': 1000,
+        'background-color': ''
+      }).animate({
+        left: '-=' + game.borderThickness.toString(),
+        top: '-=' + game.borderThickness.toString()
+      }).animate({
+        left: '-100px',
+        top: '-100px'
+      }).queue( function(next) {
+        game.markedTile.element.remove();
+        game.markedTile = null;
+        next();
+      });
+
       game.detachTile(tile);
-      tile.element.remove();
+      game.locked = true;
+      tile.element.css('z-index', 1000).animate({
+        left: '-=' + game.borderThickness.toString(),
+        top: '-=' + game.borderThickness.toString()
+      }).animate({
+        left: '-100px',
+        top: '-100px'
+      }).queue( function(next) {
+        game.locked = false;
+        tile.element.remove();
+        next();
+      });
+
       game.tileCount -= 2;
       if (game.tileCount <= 0) {
         alert('Game won!');
@@ -270,15 +298,15 @@ game.updateTiles = function() {
   allTiles.css('width', (game.tileWidth*game.selectedLayout.tile_size[0]).toString() + "px");
   allTiles.css('height', (game.tileHeight*game.selectedLayout.tile_size[0]).toString() + "px");
 
-  var borderThickness = game.tileWidth/3;
+  game.borderThickness = game.tileWidth/3;
   for (var i=0; i< this.tiles.length; i++) {
-    game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(borderThickness -1 ) + offsetLeft).toString() + 'px');
-    game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(borderThickness -1)).toString() + 'px');
+    game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(game.borderThickness -1 ) + offsetLeft).toString() + 'px');
+    game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(game.borderThickness -1)).toString() + 'px');
     game.tiles[i].element.css('border-radius', (game.tileWidth/3).toString() + 'px');
     game.tiles[i].element.css('border-radius', (game.tileWidth/3).toString() + 'px');
     game.tiles[i].element.css('box-shadow', ('{0}px {0}px brown, {1}px {1}px gray'
-                                             .replace(/\{0\}/g, borderThickness/2)
-                                             .replace(/\{1\}/g, borderThickness)));
+                                             .replace(/\{0\}/g, game.borderThickness/2)
+                                             .replace(/\{1\}/g, game.borderThickness)));
   }
 };
 
