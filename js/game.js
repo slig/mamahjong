@@ -3,8 +3,6 @@ var game = {layouts: {}};
 //Defaults
 game.boardWidth = 800;
 game.boardHeight = 600;
-game.tileAspectRatio = 1.3;
-
 
 game.layouts.turtle = {
   tile_size: [2,2],
@@ -104,7 +102,24 @@ game.layouts.turtle = {
   ]
 };
 
+game.tilesets = {};
+game.tilesets.classic = {
+  img: 'img/tileset01.svg',
+  tileAspectRatio: 1.3,
+  tileColor: function(type, selected){return selected?'lightblue':'';}
+};
+game.tilesets.helldivers = {
+  img: 'img/tileset02.svg',
+  tileAspectRatio: 1,
+  tileColor: function(type, selected){
+    if (type<23) {return selected ? 'rgb(26, 66, 111)':'rgb(76, 116, 161)';}
+    else if (type<30) {return selected ? 'rgb(75, 109, 49)':'rgb(125, 159, 99)';}
+    else {return selected ? 'rgb(89, 41, 31)':'rgb(139, 91, 81)';}
+  }
+};
+
 game.selectedLayout = game.layouts.turtle;
+game.selectedTileset = game.tilesets.classic;
 game.gridWidth = game.selectedLayout.gridWidth;
 game.gridHeight = game.selectedLayout.gridHeight;
 
@@ -149,7 +164,7 @@ game.onTileClick = function(event){
       game.detachTile(game.markedTile);
       game.markedTile.element.css({
         'z-index': 1000,
-        'background-color': ''
+        'background-color': game.selectedTileset.tileColor(game.markedTile.type)
       }).animate({
         left: '-=' + game.borderThickness.toString(),
         top: '-=' + game.borderThickness.toString()
@@ -182,12 +197,12 @@ game.onTileClick = function(event){
         game.newGame();
       }
     } else {
-      game.markedTile.element.css('background-color', '');
+      tile.element.css('background-color', game.selectedTileset.tileColor(tile.type));
       game.markedTile = null;
     }
   } else {
     game.markedTile = tile;
-    tile.element.css('background-color', 'lightblue');
+    tile.element.css('background-color', game.selectedTileset.tileColor(tile.type, true));
   }
 };
 
@@ -204,6 +219,7 @@ game.createTile = function(x, y, z, type) {
   newTile.element.css('z-index', (y + x*10 + z*100));
   newTile.element.css('background-position-x', type%6*20 + '%');
   newTile.element.css('background-position-y', Math.floor(type/6)*20 + '%');
+  newTile.element.css('background-color', game.selectedTileset.tileColor(newTile.type));
   newTile.element.on('click', game.onTileClick);
   $('.board').append(newTile.element);
   for (var i=0; i<newTile.id; i++) {
@@ -281,16 +297,16 @@ game.updateTiles = function() {
   game.width = board.width();
   game.height = board.height();
 
-  game.gridAspectRatio = (game.gridHeight / game.gridWidth) * game.tileAspectRatio;
+  game.gridAspectRatio = (game.gridHeight / game.gridWidth) * game.selectedTileset.tileAspectRatio;
 
   var offsetLeft;
   if (game.height/game.width > game.gridAspectRatio) {
     game.tileWidth = (game.width) / game.gridWidth;
-    game.tileHeight = game.tileWidth * game.tileAspectRatio;
+    game.tileHeight = game.tileWidth * game.selectedTileset.tileAspectRatio;
     offsetLeft = 0;
   } else {
     game.tileHeight = game.height / game.gridHeight;
-    game.tileWidth =  game.tileHeight / game.tileAspectRatio;
+    game.tileWidth =  game.tileHeight / game.selectedTileset.tileAspectRatio;
     offsetLeft = (game.width - game.tileWidth*game.gridWidth) / 2;
   }
 
@@ -300,6 +316,7 @@ game.updateTiles = function() {
 
   game.borderThickness = game.tileWidth/3;
   for (var i=0; i< this.tiles.length; i++) {
+    game.tiles[i].element.css('background-image', 'url("' + game.selectedTileset.img + '")');
     game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(game.borderThickness -1 ) + offsetLeft).toString() + 'px');
     game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(game.borderThickness -1)).toString() + 'px');
     game.tiles[i].element.css('border-radius', (game.tileWidth/3).toString() + 'px');
@@ -338,6 +355,22 @@ $(document).ready(function(){
     game.updateTiles();
   });
   $('.newGame').click(game.newGame);
+
+
+  //TODO:Sanitize parameters
+  var params = location.search.substring(1).split('&');
+  var param = '';
+  var value = '';
+  for (var i=0;i<params.length;i++) {
+    param = params[i].split('=')[0];
+    value = params[i].split('=')[1];
+    if (param=='layout' && game.layouts[value]) {
+      game.selectedLayout = game.layouts[value];
+    }
+    if (param=='tileset' && game.tilesets[value]) {
+      game.selectedTileset = game.tilesets[value];
+    }
+  }
 
   game.newGame();
 
