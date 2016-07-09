@@ -355,6 +355,10 @@ $(document).ready(function(){
     game.updateTiles();
   });
   $('.newGame').click(game.newGame);
+  $('.open-menu').click(function(){
+    $('.menu').fadeToggle();
+    $('.curtain').fadeToggle();
+  });
 
 
   //TODO:Sanitize parameters

@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
 }
 
 p {
@@ -8,7 +9,6 @@ p {
   line-height: 50px;
   margin-left: 20px;
   color: white;
-  font-family: sans-serif;
 }
 
 html, body {
@@ -22,7 +22,16 @@ html, body {
   background: rgb(172, 222, 247);
   border-bottom: 3px solid rgb(91, 88, 255);;
   display: table-row;
-  display: none;
+}
+
+.title {
+  float: left;
+}
+
+.open-menu {
+  float: right;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .board {
@@ -30,6 +39,29 @@ html, body {
   background: rgb(86, 186, 105);
   overflow: hidden;
   position: relative;
+}
+
+.menu {
+  max-width: 500px;
+  margin: auto;
+  display: none;
+  background-color: white;
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 0 10px;
+  margin-top: 10px;
+}
+
+.curtain {
+  display: none;
+  background: black;
+  opacity: 0.7;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  top: 0;
+  left: 0;
 }
 
 .tile {
@@ -54,17 +86,6 @@ html, body {
 
 .newGame {
   background-color: lightblue;
-  position: absolute;
-  top: 5px;
-  right: 5px;
   cursor: pointer;
-  padding: 5px;
-  color: white;
-  font-family: monospace;
-  border: 2px solid white;
-  border-radius: 10px;
-}
-
-.newGame:hover {
-  background-color: blue;
+  float: right;
 }
