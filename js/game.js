@@ -1,3 +1,5 @@
+'use strict';
+
 var game = {layouts: {}};
 
 //Defaults
@@ -226,7 +228,6 @@ game.onTileClick = function(event){
       if (!game.hasValidTurn()) {
         alert('No valid turns left!');
       }
-      console.log(game.getFreeTiles().length);
     } else {
       tile.element.css('background-color', game.selectedTileset.tileColor(tile.type));
       game.markedTile = null;
@@ -293,11 +294,11 @@ game.createTile = function(x, y, z, type) {
 game.readSelectedLayout = function() {
   game.tiles = [];
   $('.tile').remove();
-  types = [];
+  var types = [];
   for (var i=0; i<36; i++) {
     types[i] = 4;
   }
-  tLength = types.length;
+  var tLength = types.length;
   var type = 0;
   var tileCount = 0;
 
