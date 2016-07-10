@@ -359,6 +359,10 @@ $(document).ready(function(){
     $('.menu').fadeToggle();
     $('.curtain').fadeToggle();
   });
+  $('.curtain').click(function(){
+    $('.menu').fadeToggle();
+    $('.curtain').fadeToggle();
+  });
 
 
   //TODO:Sanitize parameters

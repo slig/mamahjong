@@ -52,6 +52,16 @@ html, body {
   margin-top: 10px;
 }
 
+.menu table {
+  width: 100%;
+  font-size: 1.5em;
+  line-height: 50px;
+}
+
+td:last-child {
+    float: right;
+}
+
 .curtain {
   display: none;
   background: black;
