@@ -146,13 +146,41 @@ game.detachTile = function(tile) {
     tile.bottomTiles.count--;
     game.updateTileState(tile);
   }
+  tile.free = false;
+  tile.detached = true;
+};
+
+game.hasValidTurn = function() {
+  var freeTiles = [];
+  for (var i=0; i<game.tiles.length; i++) {
+    if (game.tiles[i].free && game.tiles[i].element) {
+      if (freeTiles[game.tiles[i].type]) {
+        return true;
+      } else {
+        freeTiles[game.tiles[i].type] = 1;
+      }
+    }
+  }
+  return false;
+};
+
+game.getFreeTiles = function() {
+  var freeTiles = [];
+  var pos = 0;
+  for (var i=0; i<game.tiles.length; i++) {
+    if (game.tiles[i].free) {
+      freeTiles[pos] = game.tiles[i];
+      pos++;
+    }
+  }
+  return freeTiles;
 };
 
 game.onTileClick = function(event){
   var id = parseInt(event.target.id);
   var tile = game.tiles[id];
 
-  if (!tile.free || game.locked) {
+  if (!tile.free) {
     return;
   }
 
@@ -190,12 +218,15 @@ game.onTileClick = function(event){
         tile.element.remove();
         next();
       });
-
       game.tileCount -= 2;
       if (game.tileCount <= 0) {
         alert('Game won!');
         game.newGame();
       }
+      if (!game.hasValidTurn()) {
+        alert('No valid turns left!');
+      }
+      console.log(game.getFreeTiles().length);
     } else {
       tile.element.css('background-color', game.selectedTileset.tileColor(tile.type));
       game.markedTile = null;
@@ -328,6 +359,7 @@ game.updateTiles = function() {
 };
 
 game.updateTileState = function(tile) {
+  if (tile.detach) {return;}
   if ((tile.leftTiles.count>0 && tile.rightTiles.count>0) || tile.topTiles.count>0) {
     tile.free = false;
   } else {
