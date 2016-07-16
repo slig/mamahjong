@@ -249,8 +249,7 @@ game.createTile = function(x, y, z, type) {
   newTile.rightTiles = {count:0};
   newTile.element = $('<div id="'+newTile.id+'" class="tile"/>');
   newTile.element.css('z-index', (y + x*10 + z*100));
-  newTile.element.css('background-position-x', type%6*20 + '%');
-  newTile.element.css('background-position-y', Math.floor(type/6)*20 + '%');
+  newTile.element.css('background-position', type%6*20 + '% ' + Math.floor(type/6)*20 + '%' );
   newTile.element.css('background-color', game.selectedTileset.tileColor(newTile.type));
   newTile.element.on('click', game.onTileClick);
   $('.board').append(newTile.element);
@@ -383,19 +382,21 @@ game.newGame = function() {
   game.updateFreeTiles();
 };
 
+game.handleOptions = function() {
+  console.log('Options have changed!');
+};
+
 $(document).ready(function(){
   $(window).on('resize', function() {
     game.updateTiles();
   });
   $('.newGame').click(game.newGame);
-  $('.open-menu').click(function(){
+  $('.open-menu, .curtain, .menu-exit').click(function(){
     $('.menu').fadeToggle();
     $('.curtain').fadeToggle();
   });
-  $('.curtain').click(function(){
-    $('.menu').fadeToggle();
-    $('.curtain').fadeToggle();
-  });
+
+  $('.menu-input').on('change', game.handleOptions);
 
 
   //TODO:Sanitize parameters

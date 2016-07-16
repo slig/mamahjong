@@ -17,31 +17,40 @@
     </div>
     <div class="board">
       <div class="menu">
+        <div class= menu-exit></div>
         <h1>Menu</h1>
         <table>
           <tr>
-            <td>Language</td>
-            <td>English</td>
+            <td><p>Language</p></td>
+            <td><select class="menu-input" name="language">
+              <option value="english">English</option>
+              <option value="german">Deutsch</option>
+            </select></td>
           </tr>
           <tr>
-            <td>Tileset</td>
-            <td>Classic</td>
+            <td><p>Tileset</p></td>
+            <td><select class="menu-input" name="tileset">
+              <option value="classic">Classic</option>
+              <option value="helldivers">Helldivers</option>
+            </select></td>
           </tr>
           <tr>
-            <td>Layout</td>
-            <td>Turtle</td>
+            <td><p>Layout</p></td>
+            <td><select class="menu-input" name="layout">
+              <option value="turtle">Turtle</option>
+            </select></td>
           </tr>
           <tr>
-            <td>Highlight removable tiles</td>
-            <td>Off</td>
+            <td><p>Highlight removable tiles</p></td>
+            <td><input class="menu-input" type="checkbox" name="highlight" value="false"></td>
           </tr>
           <tr>
-            <td>No valid turns notification</td>
-            <td>On</td>
+            <td><p>No valid turns notification</p></td>
+            <td><input class="menu-input" type="checkbox" name="validTurnDetection" value="true"></td>
           </tr>
           <tr>
-            <td>Timer</td>
-            <td>Off</td>
+            <td><p>Timer</p></td>
+            <td><input class="menu-input" type="checkbox" name="timerEnabled" value="false"></td>
           </tr>
         </table>
       </div>

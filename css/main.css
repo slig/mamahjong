@@ -20,8 +20,17 @@ html, body {
 .header {
   height: 50px;
   background: rgb(172, 222, 247);
-  border-bottom: 3px solid rgb(91, 88, 255);;
-  display: table-row;
+  border-bottom: 3px solid rgb(91, 88, 255);
+}
+
+.header * {
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .title {
@@ -35,10 +44,12 @@ html, body {
 }
 
 .board {
-  height: 100%;
+  width: 100%;
   background: rgb(86, 186, 105);
   overflow: hidden;
-  position: relative;
+  position: absolute;
+  top: 50px;
+  bottom: 0;
 }
 
 .menu {
@@ -52,14 +63,75 @@ html, body {
   margin-top: 10px;
 }
 
+.menu h1 {
+  margin-left: 10px;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 10px;
+  border-bottom: 2px solid gray;
+}
+
+.menu p {
+  color: black;
+  font-size: 20px;
+  margin-left: 10px
+}
+
 .menu table {
   width: 100%;
   font-size: 1.5em;
   line-height: 50px;
 }
 
+.menu select {
+  height: 40px;
+  width: 200px;
+  margin-right: 10px;
+  display: block;
+  background-color: lightgray;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.menu input[type=checkbox] {
+  background-image: url('../img/checkstates.svg');
+  background-size: 200% 100%;
+  height: 40px;
+  width: 40px;
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+  background-color: red;
+  display: block;
+  margin-top: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+
+}
+
+.menu input[type=checkbox]:checked {
+  background-color: green;
+  background-position: 100% 0;
+}
+
 td:last-child {
     float: right;
+}
+
+.menu-exit {
+  width: 30px;
+  height: 30px;
+  background-image: url('../img/checkstates.svg');
+  background-size: 200% 100%;
+  background-color: white;
+  background-blend-mode: difference;
+  opacity: 0.5;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
 }
 
 .curtain {
@@ -95,7 +167,6 @@ td:last-child {
 }
 
 .newGame {
-  background-color: lightblue;
   cursor: pointer;
   float: right;
 }
