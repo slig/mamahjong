@@ -1,129 +1,165 @@
 'use strict';
 
-var game = {layouts: {}};
+var game = {};
 
-//Defaults
-game.boardWidth = 800;
-game.boardHeight = 600;
+//===============================================
+//                     Data
+//===============================================
 
+game.languages = {
+  'default': 'english',
+
+  english: {
+    texts: {
+      eng: 'English',
+      ger: 'Englisch'
+    },
+    id: 'eng'
+  },
+
+  german: {
+    texts: {
+      eng: 'German',
+      ger: 'Deutsch'
+    },
+    id: 'ger'
+  }
+};
+
+game.layouts = {'default': 'turtle'};
 game.layouts.turtle = {
+  texts: {
+    eng: 'Turtle',
+    ger: 'Schildkröte'
+  },
   tile_size: [2,2],
   gridWidth: 30,
   gridHeight: 16,
   tile_layers: [
     [
-      "  #*#*#*#*#*#*#*#*#*#*#*#*    \n",
-      "  ************************    \n",
-      "      #*#*#*#*#*#*#*#*        \n",
-      "      ****************        \n",
-      "    #*#*#*#*#*#*#*#*#*#*      \n",
-      "    ********************      \n",
-      "  #*#*#*#*#*#*#*#*#*#*#*#*    \n",
-      "#*************************#*#*\n",
-      "**#*#*#*#*#*#*#*#*#*#*#*#*****\n",
-      "  ************************    \n",
-      "    #*#*#*#*#*#*#*#*#*#*      \n",
-      "    ********************      \n",
-      "      #*#*#*#*#*#*#*#*        \n",
-      "      ****************        \n",
-      "  #*#*#*#*#*#*#*#*#*#*#*#*    \n",
-      "  ************************    \n"
+      '  #*#*#*#*#*#*#*#*#*#*#*#*    \n',
+      '  ************************    \n',
+      '      #*#*#*#*#*#*#*#*        \n',
+      '      ****************        \n',
+      '    #*#*#*#*#*#*#*#*#*#*      \n',
+      '    ********************      \n',
+      '  #*#*#*#*#*#*#*#*#*#*#*#*    \n',
+      '#*************************#*#*\n',
+      '**#*#*#*#*#*#*#*#*#*#*#*#*****\n',
+      '  ************************    \n',
+      '    #*#*#*#*#*#*#*#*#*#*      \n',
+      '    ********************      \n',
+      '      #*#*#*#*#*#*#*#*        \n',
+      '      ****************        \n',
+      '  #*#*#*#*#*#*#*#*#*#*#*#*    \n',
+      '  ************************    \n'
     ],
     [
-      "                              \n",
-      "                              \n",
-      "        #*#*#*#*#*#*          \n",
-      "        ************          \n",
-      "        #*#*#*#*#*#*          \n",
-      "        ************          \n",
-      "        #*#*#*#*#*#*          \n",
-      "        ************          \n",
-      "        #*#*#*#*#*#*          \n",
-      "        ************          \n",
-      "        #*#*#*#*#*#*          \n",
-      "        ************          \n",
-      "        #*#*#*#*#*#*          \n",
-      "        ************          \n",
-      "                              \n",
-      "                              \n"
+      '                              \n',
+      '                              \n',
+      '        #*#*#*#*#*#*          \n',
+      '        ************          \n',
+      '        #*#*#*#*#*#*          \n',
+      '        ************          \n',
+      '        #*#*#*#*#*#*          \n',
+      '        ************          \n',
+      '        #*#*#*#*#*#*          \n',
+      '        ************          \n',
+      '        #*#*#*#*#*#*          \n',
+      '        ************          \n',
+      '        #*#*#*#*#*#*          \n',
+      '        ************          \n',
+      '                              \n',
+      '                              \n'
     ],
     [
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "          #*#*#*#*            \n",
-      "          ********            \n",
-      "          #*#*#*#*            \n",
-      "          ********            \n",
-      "          #*#*#*#*            \n",
-      "          ********            \n",
-      "          #*#*#*#*            \n",
-      "          ********            \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n"
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '          #*#*#*#*            \n',
+      '          ********            \n',
+      '          #*#*#*#*            \n',
+      '          ********            \n',
+      '          #*#*#*#*            \n',
+      '          ********            \n',
+      '          #*#*#*#*            \n',
+      '          ********            \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n'
     ],
     [
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "            #*#*              \n",
-      "            ****              \n",
-      "            #*#*              \n",
-      "            ****              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n"
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '            #*#*              \n',
+      '            ****              \n',
+      '            #*#*              \n',
+      '            ****              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n'
     ],
     [
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "             #*               \n",
-      "             **               \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n",
-      "                              \n"
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '             #*               \n',
+      '             **               \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n',
+      '                              \n'
     ]
   ]
 };
 
-game.tilesets = {};
-game.tilesets.classic = {
-  img: 'img/tileset01.svg',
-  tileAspectRatio: 1.3,
-  tileColor: function(type, selected){return selected?'lightblue':'';}
-};
-game.tilesets.helldivers = {
-  img: 'img/tileset02.svg',
-  tileAspectRatio: 1,
-  tileColor: function(type, selected){
-    if (type<23) {return selected ? 'rgb(26, 66, 111)':'rgb(76, 116, 161)';}
-    else if (type<30) {return selected ? 'rgb(75, 109, 49)':'rgb(125, 159, 99)';}
-    else {return selected ? 'rgb(89, 41, 31)':'rgb(139, 91, 81)';}
+game.tilesets = {
+  'default': 'classic',
+
+  classic: {
+    texts: {
+      eng: 'Classic',
+      ger: 'Klassisch'
+    },
+    img: 'img/tileset01.svg',
+    tileAspectRatio: 1.3,
+    tileColor: function(type, selected){return selected?'lightblue':'';}
+  },
+
+  helldivers: {
+    texts: {
+      eng: 'Helldivers',
+      ger: 'Helldivers'
+    },
+    img: 'img/tileset02.svg',
+    tileAspectRatio: 1,
+    tileColor: function(type, selected){
+      if (type<23) {return selected ? 'rgb(26, 66, 111)':'rgb(76, 116, 161)';}
+      else if (type<30) {return selected ? 'rgb(75, 109, 49)':'rgb(125, 159, 99)';}
+      else {return selected ? 'rgb(89, 41, 31)':'rgb(139, 91, 81)';}
+    }
   }
 };
 
-game.selectedLayout = game.layouts.turtle;
-game.selectedTileset = game.tilesets.classic;
-game.gridWidth = game.selectedLayout.gridWidth;
-game.gridHeight = game.selectedLayout.gridHeight;
+//===============================================
+//                    Methods
+//===============================================
 
 game.detachTile = function(tile) {
   var id = tile.id;
@@ -306,7 +342,7 @@ game.readSelectedLayout = function() {
       for (var k=0; k<game.selectedLayout.tile_layers[i][j].length; k++) {
         if (game.selectedLayout.tile_layers[i][j][k] === '#') {
           if (tileCount == 144) {
-            console.error("Too many tiles in layout");
+            console.error('Too many tiles in layout');
             return;
           }
           do {
@@ -342,8 +378,8 @@ game.updateTiles = function() {
   }
 
   var allTiles = $('.tile');
-  allTiles.css('width', (game.tileWidth*game.selectedLayout.tile_size[0]).toString() + "px");
-  allTiles.css('height', (game.tileHeight*game.selectedLayout.tile_size[0]).toString() + "px");
+  allTiles.css('width', (game.tileWidth*game.selectedLayout.tile_size[0]).toString() + 'px');
+  allTiles.css('height', (game.tileHeight*game.selectedLayout.tile_size[0]).toString() + 'px');
 
   game.borderThickness = game.tileWidth/3;
   for (var i=0; i< this.tiles.length; i++) {
@@ -386,7 +422,17 @@ game.handleOptions = function() {
   console.log('Options have changed!');
 };
 
+//===============================================
+//                Initialization
+//===============================================
+
 $(document).ready(function(){
+  game.selectedLanguage = game.languages[game.languages.default];
+  game.selectedLayout = game.layouts[game.layouts.default];
+  game.selectedTileset = game.tilesets[game.tilesets.default];
+  game.gridWidth = game.selectedLayout.gridWidth;
+  game.gridHeight = game.selectedLayout.gridHeight;
+
   $(window).on('resize', function() {
     game.updateTiles();
   });
