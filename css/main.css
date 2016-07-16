@@ -61,6 +61,9 @@ html, body {
   z-index: 1000;
   box-shadow: 0 0 10px;
   margin-top: 10px;
+  border-left: 6px solid brown;
+  border-right: 6px solid brown;
+  border-radius: 6px;
 }
 
 .menu h1 {

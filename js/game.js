@@ -10,7 +10,7 @@ game.languages = {
   'default': 'english',
 
   english: {
-    texts: {
+    text: {
       eng: 'English',
       ger: 'Englisch'
     },
@@ -18,7 +18,7 @@ game.languages = {
   },
 
   german: {
-    texts: {
+    text: {
       eng: 'German',
       ger: 'Deutsch'
     },
@@ -28,7 +28,7 @@ game.languages = {
 
 game.layouts = {'default': 'turtle'};
 game.layouts.turtle = {
-  texts: {
+  text: {
     eng: 'Turtle',
     ger: 'Schildkröte'
   },
@@ -133,7 +133,7 @@ game.tilesets = {
   'default': 'classic',
 
   classic: {
-    texts: {
+    text: {
       eng: 'Classic',
       ger: 'Klassisch'
     },
@@ -143,7 +143,7 @@ game.tilesets = {
   },
 
   helldivers: {
-    texts: {
+    text: {
       eng: 'Helldivers',
       ger: 'Helldivers'
     },
@@ -418,34 +418,48 @@ game.newGame = function() {
   game.updateFreeTiles();
 };
 
-game.handleOptions = function() {
-  console.log('Options have changed!');
+game.fillSelection = function(option, source) {
+  var element = $('.menu [name="' + option + '"]');
+  for(var key in source) {
+    if (key=='default') {continue;}
+    element.append('<option value="{0}">{1}</option'
+                   .replace('{0}', key)
+                   .replace('{1}', source[key].text[game.selectedLanguage.id]));
+  }
 };
 
-//===============================================
-//                Initialization
-//===============================================
+game.updateLanguage = function() {
+  //TODO: Translate UI
+}
 
-$(document).ready(function(){
-  game.selectedLanguage = game.languages[game.languages.default];
-  game.selectedLayout = game.layouts[game.layouts.default];
-  game.selectedTileset = game.tilesets[game.tilesets.default];
-  game.gridWidth = game.selectedLayout.gridWidth;
-  game.gridHeight = game.selectedLayout.gridHeight;
+game.handleOptions = function() {
+  var newLanguage = $('.menu [name="language"]').val();
+  var newTileset = $('.menu [name="tileset"]').val();
+  var newLayout = $('.menu [name="layout"]').val();
+  var newHighlightFree = $('.menu [name="highlightFree"]').val();
+  var newInformLoss = $('.menu [name="informLoss"]').val();
+  var newShowTimer = $('.menu [name="showTimer"]').val();
 
-  $(window).on('resize', function() {
-    game.updateTiles();
-  });
-  $('.newGame').click(game.newGame);
-  $('.open-menu, .curtain, .menu-exit').click(function(){
-    $('.menu').fadeToggle();
-    $('.curtain').fadeToggle();
-  });
+  if (game.selectedLanguage != game.languages[newLanguage]) {
+    game.selectedLanguage = game.languages[newLanguage];
+    game.updateLanguage();
+  } else if (game.selectedLayout != game.layouts[newLayout]) {
+    game.selectedLayout = game.layouts[newLayout];
+    game.newGame();
+  } else if (game.selectedTileset != game.tilesets[newTileset]) {
+    game.selectedTileset = game.tilesets[newTileset];
+    game.newGame();
+  } else if (game.highlightFree != newHighlightFree) {
+    game.highlightFree = newHighlightFree;
+  } else if (game.informLoss != newInformLoss) {
+    game.informLoss = newInformLoss;
+  } else if (game.showTimer != newShowTimer) {
+    game.showTimer = newShowTimer;
+  }
+};
 
-  $('.menu-input').on('change', game.handleOptions);
-
-
-  //TODO:Sanitize parameters
+game.readURLParams = function() {
+  //TODO: Sanitize parameters
   var params = location.search.substring(1).split('&');
   var param = '';
   var value = '';
@@ -458,9 +472,48 @@ $(document).ready(function(){
     if (param=='tileset' && game.tilesets[value]) {
       game.selectedTileset = game.tilesets[value];
     }
+    if (param=='language' && game.languages[value]) {
+      game.selectedLanguage = game.languages[value];
+    }
   }
+};
 
+//===============================================
+//                Initialization
+//===============================================
+
+$(document).ready(function(){
+  //Establish defaults
+  game.selectedLanguage = game.languages[game.languages.default];
+  game.selectedLayout = game.layouts[game.layouts.default];
+  game.selectedTileset = game.tilesets[game.tilesets.default];
+  game.highlightFree = false;
+  game.informLoss = true;
+  game.showTimer = false;
+  game.gridWidth = game.selectedLayout.gridWidth;
+  game.gridHeight = game.selectedLayout.gridHeight;
+  game.readURLParams();
+
+  //Initialize menu
+  game.fillSelection('language', game.languages);
+  game.fillSelection('tileset', game.tilesets);
+  game.fillSelection('layout', game.layouts);
+
+  //Register callbacks
+  $(window).on('resize', function() {
+    game.updateTiles();
+  });
+
+  $('.newGame').click(game.newGame);
+
+  $('.open-menu, .curtain, .menu-exit').click(function(){
+    $('.menu').fadeToggle();
+    $('.curtain').fadeToggle();
+  });
+
+  $('.menu-input').on('change', game.handleOptions);
+
+  //Start game
   game.newGame();
-
   game.updateTiles();
 });
