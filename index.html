@@ -12,36 +12,36 @@
   <body>
     <div class="header">
       <p class="title">Mamahjong</p>
-      <p class="open-menu">Menu</p>
-      <p class="newGame">New Game</p>
+      <p class="open-menu" id="button_menu">Menu</p>
+      <p class="newGame" id="button_new_game">New Game</p>
     </div>
     <div class="board">
       <div class="menu">
         <div class= menu-exit></div>
-        <h1>Menu</h1>
+        <h1 id="header_menu">Menu</h1>
         <table>
           <tr>
-            <td><p>Language</p></td>
+            <td><p id="option_language">Language</p></td>
             <td><select class="menu-input" name="language"></select></td>
           </tr>
           <tr>
-            <td><p>Tileset</p></td>
+            <td><p id="option_tileset">Tileset</p></td>
             <td><select class="menu-input" name="tileset"></select></td>
           </tr>
           <tr>
-            <td><p>Layout</p></td>
+            <td><p id="option_layout">Layout</p></td>
             <td><select class="menu-input" name="layout"></select></td>
           </tr>
           <tr>
-            <td><p>Highlight removable tiles</p></td>
+            <td><p id="option_highlight_free">Highlight removable tiles</p></td>
             <td><input class="menu-input" type="checkbox" name="highlightFree" value="false"></td>
           </tr>
           <tr>
-            <td><p>No valid turns notification</p></td>
+            <td><p id="option_inform_loss">No valid turns notification</p></td>
             <td><input class="menu-input" type="checkbox" name="informLoss" value="true"></td>
           </tr>
           <tr>
-            <td><p>Timer</p></td>
+            <td><p id="option_show_timer">Timer</p></td>
             <td><input class="menu-input" type="checkbox" name="showTimer" value="false"></td>
           </tr>
         </table>

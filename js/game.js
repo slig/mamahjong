@@ -26,6 +26,30 @@ game.languages = {
   }
 };
 
+game.dict = {'default': 'eng'};
+game.dict.eng = {
+  button_menu: 'Menu',
+  button_new_game: 'New Game',
+  header_menu: 'Menu',
+  option_language: 'Language',
+  option_tileset: 'Tileset',
+  option_layout: 'Layout',
+  option_highlight_free: 'Highlight removable tiles',
+  option_inform_loss: 'No valid turns notification',
+  option_show_timer: 'Timer',
+};
+game.dict.ger = {
+  button_menu: 'Menü',
+  button_new_game: 'Neues Spiel',
+  header_menu: 'Menü',
+  option_language: 'Sprache',
+  option_tileset: 'Bilder Set',
+  option_layout: 'Muster',
+  option_highlight_free: 'Freie Steine hervorheben',
+  option_inform_loss: 'Hinweis bei Niederlage',
+  option_show_timer: 'Zeige Zeit',
+};
+
 game.layouts = {'default': 'turtle'};
 game.layouts.turtle = {
   text: {
@@ -428,9 +452,28 @@ game.fillSelection = function(option, source) {
   }
 };
 
-game.updateLanguage = function() {
-  //TODO: Translate UI
+game.translateSelection = function(option, source) {
+  var options = $('.menu [name="' + option + '"]').children();
+  for (var i=0; i<options.length; i++) {
+    options[i].text = source[options[i].value].text[game.selectedLanguage.id];
+  }
 }
+
+game.updateLanguage = function() {
+  game.translateSelection('language', game.languages);
+  game.translateSelection('tileset', game.tilesets);
+  game.translateSelection('layout', game.layouts);
+
+  var element = {};
+  for (var key in game.dict[game.dict.default]) {
+    element = $('#' + key);
+    if (typeof(element.text) === 'function') {
+      element.text(game.dict[game.selectedLanguage.id][key]);
+    } else {
+      element.text = game.dict[game.selectedLanguage.id][key];
+    }
+  }
+};
 
 game.handleOptions = function() {
   var newLanguage = $('.menu [name="language"]').val();
@@ -484,7 +527,13 @@ game.readURLParams = function() {
 
 $(document).ready(function(){
   //Establish defaults
-  game.selectedLanguage = game.languages[game.languages.default];
+  var clientLang = navigator.language || navigator.userLanguage;
+  var langDict = {
+    'en-US': 'english',
+    'de-DE': 'german'
+  };
+  game.selectedLanguage = game.languages[langDict[clientLang]] ||
+                          game.languages[game.languages.default];
   game.selectedLayout = game.layouts[game.layouts.default];
   game.selectedTileset = game.tilesets[game.tilesets.default];
   game.highlightFree = false;
@@ -498,6 +547,7 @@ $(document).ready(function(){
   game.fillSelection('language', game.languages);
   game.fillSelection('tileset', game.tilesets);
   game.fillSelection('layout', game.layouts);
+  game.updateLanguage();
 
   //Register callbacks
   $(window).on('resize', function() {

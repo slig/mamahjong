@@ -85,11 +85,12 @@ html, body {
   width: 100%;
   font-size: 1.5em;
   line-height: 50px;
+  padding-right: 10px;
 }
 
 .menu select {
   height: 40px;
-  width: 200px;
+  width: 100%;
   margin-right: 10px;
   display: block;
   background-color: lightgray;
@@ -117,10 +118,6 @@ html, body {
 .menu input[type=checkbox]:checked {
   background-color: green;
   background-position: 100% 0;
-}
-
-td:last-child {
-    float: right;
 }
 
 .menu-exit {
