@@ -10,6 +10,7 @@ game.languages = {
   'default': 'english',
 
   english: {
+    name: 'english',
     text: {
       eng: 'English',
       ger: 'Englisch'
@@ -18,6 +19,7 @@ game.languages = {
   },
 
   german: {
+    name: 'german',
     text: {
       eng: 'German',
       ger: 'Deutsch'
@@ -52,6 +54,7 @@ game.dict.ger = {
 
 game.layouts = {'default': 'turtle'};
 game.layouts.turtle = {
+  name: 'turtle',
   text: {
     eng: 'Turtle',
     ger: 'Schildkröte'
@@ -157,6 +160,7 @@ game.tilesets = {
   'default': 'classic',
 
   classic: {
+    name: 'classic',
     text: {
       eng: 'Classic',
       ger: 'Klassisch'
@@ -167,6 +171,7 @@ game.tilesets = {
   },
 
   helldivers: {
+    name: 'helldivers',
     text: {
       eng: 'Helldivers',
       ger: 'Helldivers'
@@ -180,6 +185,12 @@ game.tilesets = {
     }
   }
 };
+
+//===============================================
+//                  Tile Logic
+//===============================================
+
+
 
 //===============================================
 //                    Methods
@@ -385,12 +396,13 @@ game.readSelectedLayout = function() {
 
 game.updateTiles = function() {
   var board = $('.board');
-  game.width = board.width();
-  game.height = board.height();
+  game.width = board.width() -20;
+  game.height = board.height() -20;
 
   game.gridAspectRatio = (game.gridHeight / game.gridWidth) * game.selectedTileset.tileAspectRatio;
 
   var offsetLeft;
+  var offsetTop = 10;
   if (game.height/game.width > game.gridAspectRatio) {
     game.tileWidth = (game.width) / game.gridWidth;
     game.tileHeight = game.tileWidth * game.selectedTileset.tileAspectRatio;
@@ -400,7 +412,7 @@ game.updateTiles = function() {
     game.tileWidth =  game.tileHeight / game.selectedTileset.tileAspectRatio;
     offsetLeft = (game.width - game.tileWidth*game.gridWidth) / 2;
   }
-
+  offsetLeft += 10;
   var allTiles = $('.tile');
   allTiles.css('width', (game.tileWidth*game.selectedLayout.tile_size[0]).toString() + 'px');
   allTiles.css('height', (game.tileHeight*game.selectedLayout.tile_size[0]).toString() + 'px');
@@ -408,8 +420,8 @@ game.updateTiles = function() {
   game.borderThickness = game.tileWidth/3;
   for (var i=0; i< this.tiles.length; i++) {
     game.tiles[i].element.css('background-image', 'url("' + game.selectedTileset.img + '")');
-    game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(game.borderThickness -1 ) + offsetLeft).toString() + 'px');
-    game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(game.borderThickness -1)).toString() + 'px');
+    game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(game.borderThickness -1) + offsetLeft).toString() + 'px');
+    game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(game.borderThickness -1) + offsetTop).toString() + 'px');
     game.tiles[i].element.css('border-radius', (game.tileWidth/3).toString() + 'px');
     game.tiles[i].element.css('border-radius', (game.tileWidth/3).toString() + 'px');
     game.tiles[i].element.css('box-shadow', ('{0}px {0}px brown, {1}px {1}px gray'
@@ -442,13 +454,16 @@ game.newGame = function() {
   game.updateFreeTiles();
 };
 
-game.fillSelection = function(option, source) {
+game.fillSelection = function(option, source, value) {
   var element = $('.menu [name="' + option + '"]');
   for(var key in source) {
     if (key=='default') {continue;}
     element.append('<option value="{0}">{1}</option'
                    .replace('{0}', key)
                    .replace('{1}', source[key].text[game.selectedLanguage.id]));
+  }
+  if (value) {
+    element.val(value);
   }
 };
 
@@ -544,9 +559,9 @@ $(document).ready(function(){
   game.readURLParams();
 
   //Initialize menu
-  game.fillSelection('language', game.languages);
-  game.fillSelection('tileset', game.tilesets);
-  game.fillSelection('layout', game.layouts);
+  game.fillSelection('language', game.languages, game.selectedLanguage.name);
+  game.fillSelection('tileset', game.tilesets, game.selectedTileset.name);
+  game.fillSelection('layout', game.layouts, game.selectedLayout.name);
   game.updateLanguage();
 
   //Register callbacks
