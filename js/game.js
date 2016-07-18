@@ -190,7 +190,59 @@ game.tilesets = {
 //                  Tile Logic
 //===============================================
 
+game.tiles = [];
 
+function Tile(x, y, z, type) {
+  this.x = x; this.y = y; this.z = z; this.type = type;
+
+  var xd = game.selectedLayout.tile_size[0];
+  var yd = game.selectedLayout.tile_size[1];
+  this.id = game.tiles.length;
+  this.topTiles = {count:0};
+  this.bottomTiles = {count:0};
+  this.leftTiles = {count:0};
+  this.rightTiles = {count:0};
+  this.element = $('<div id="'+this.id+'" class="tile"/>');
+  this.element.css('z-index', (y + x*10 + z*100));
+  this.element.css('background-position', type%6*20 + '% ' + Math.floor(type/6)*20 + '%' );
+  this.element.css('background-color', game.selectedTileset.tileColor(this.type));
+  this.element.on('click', game.onTileClick);
+  $('.board').append(this.element);
+  for (var i=0; i<this.id; i++) {
+    //Check left neighbours
+    if (game.tiles[i].z===z &&
+        game.tiles[i].x===x-xd &&
+        y+yd>game.tiles[i].y &&
+        game.tiles[i].y>y-yd){
+      this.leftTiles[i] = game.tiles[i];
+      this.leftTiles.count++;
+      game.tiles[i].rightTiles[this.id] = this;
+      game.tiles[i].rightTiles.count++;
+    }
+    //Check right neighbours
+    if (game.tiles[i].z===z &&
+        game.tiles[i].x==x+xd &&
+        y+yd>game.tiles[i].y &&
+        game.tiles[i].y>y-yd){
+      this.rightTiles[i] = game.tiles[i];
+      this.rightTiles.count++;
+      game.tiles[i].leftTiles[this.id] = this;
+      game.tiles[i].leftTiles.count++;
+    }
+    //Check bottom neighbours
+    if (game.tiles[i].z===z-1 &&
+        x+xd>game.tiles[i].x &&
+        game.tiles[i].x>x-xd &&
+        y+yd>game.tiles[i].y &&
+        game.tiles[i].y>y-yd){
+      this.bottomTiles[i] = game.tiles[i];
+      this.bottomTiles.count++;
+      game.tiles[i].topTiles[this.id] = this;
+      game.tiles[i].topTiles.count++;
+    }
+  }
+  game.tiles.push(this);
+}
 
 //===============================================
 //                    Methods
