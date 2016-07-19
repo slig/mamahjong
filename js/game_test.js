@@ -2,6 +2,11 @@
 
 var play = function(turns) {
   turns = turns||5;
+  var tiles;
+  for (turns; turns>0; turns--) {
+    tiles = $('.tile');
+    tiles[Math.floor(Math.Random*tiles.length())].click();
+  }
 };
 
 describe('mamahjong', function() {
@@ -40,6 +45,6 @@ describe('mamahjong', function() {
   });
 
   it('should be playable for a while', function() {
-    play();
+    play(1000);
   });
 });

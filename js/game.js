@@ -241,39 +241,48 @@ function Tile(x, y, z, type) {
       game.tiles[i].topTiles.count++;
     }
   }
+
+  this.detach = function() {
+    var id = this.id;
+    for (var key in this.leftTiles) {
+      if (key === 'count') {continue;}
+      this.leftTiles[key].rightTiles.count--;
+      this.leftTiles[key].updateState();
+      this.leftTiles.count--;
+      this.updateState();
+    }
+    for (key in this.rightTiles) {
+      if (key === 'count') {continue;}
+      this.rightTiles[key].leftTiles.count--;
+      this.rightTiles[key].updateState();
+      this.rightTiles.count--;
+      this.updateState();
+    }
+    for (key in this.bottomTiles) {
+      if (key === 'count') {continue;}
+      this.bottomTiles[key].topTiles.count--;
+      this.bottomTiles[key].updateState();
+      this.bottomTiles.count--;
+      this.updateState();
+    }
+    this.free = false;
+    this.detached = true;
+  };
+
+  this.updateState = function() {
+    if (this.detached) {return;}
+    if ((this.leftTiles.count>0 && this.rightTiles.count>0) || this.topTiles.count>0) {
+      this.free = false;
+    } else {
+      this.free = true;
+    }
+  };
   game.tiles.push(this);
 }
 
 //===============================================
 //                    Methods
 //===============================================
-
-game.detachTile = function(tile) {
-  var id = tile.id;
-  for (var key in tile.leftTiles) {
-    if (key === 'count') {continue;}
-    tile.leftTiles[key].rightTiles.count--;
-    game.updateTileState(tile.leftTiles[key]);
-    tile.leftTiles.count--;
-    game.updateTileState(tile);
-  }
-  for (key in tile.rightTiles) {
-    if (key === 'count') {continue;}
-    tile.rightTiles[key].leftTiles.count--;
-    game.updateTileState(tile.rightTiles[key]);
-    tile.rightTiles.count--;
-    game.updateTileState(tile);
-  }
-  for (key in tile.bottomTiles) {
-    if (key === 'count') {continue;}
-    tile.bottomTiles[key].topTiles.count--;
-    game.updateTileState(tile.bottomTiles[key]);
-    tile.bottomTiles.count--;
-    game.updateTileState(tile);
-  }
-  tile.free = false;
-  tile.detached = true;
-};
 
 game.hasValidTurn = function() {
   var freeTiles = [];
@@ -309,12 +318,11 @@ game.onTileClick = function(event){
     return;
   }
 
-
   if (game.markedTile) {
     if ((game.markedTile.type == tile.type) && (game.markedTile.id != tile.id)) {
       game.locked = true;
 
-      game.detachTile(game.markedTile);
+      game.markedTile.detach();
       game.markedTile.element.css({
         'z-index': 1000,
         'background-color': game.selectedTileset.tileColor(game.markedTile.type)
@@ -330,7 +338,7 @@ game.onTileClick = function(event){
         next();
       });
 
-      game.detachTile(tile);
+      tile.detach();
       game.locked = true;
       tile.element.css('z-index', 1000).animate({
         left: '-=' + game.borderThickness.toString(),
@@ -348,69 +356,17 @@ game.onTileClick = function(event){
         alert('Game won!');
         game.newGame();
       }
-      if (!game.hasValidTurn()) {
+      if (!game.hasValidTurn() && game.informLoss) {
         alert('No valid turns left!');
       }
     } else {
-      tile.element.css('background-color', game.selectedTileset.tileColor(tile.type));
+      game.markedTile.element.css('background-color', game.selectedTileset.tileColor(tile.type));
       game.markedTile = null;
     }
   } else {
     game.markedTile = tile;
     tile.element.css('background-color', game.selectedTileset.tileColor(tile.type, true));
   }
-};
-
-game.createTile = function(x, y, z, type) {
-  var newTile = {x:x, y:y, z:z, type:type};
-  var xd = game.selectedLayout.tile_size[0];
-  var yd = game.selectedLayout.tile_size[1];
-  newTile.id = game.tiles.length;
-  newTile.topTiles = {count:0};
-  newTile.bottomTiles = {count:0};
-  newTile.leftTiles = {count:0};
-  newTile.rightTiles = {count:0};
-  newTile.element = $('<div id="'+newTile.id+'" class="tile"/>');
-  newTile.element.css('z-index', (y + x*10 + z*100));
-  newTile.element.css('background-position', type%6*20 + '% ' + Math.floor(type/6)*20 + '%' );
-  newTile.element.css('background-color', game.selectedTileset.tileColor(newTile.type));
-  newTile.element.on('click', game.onTileClick);
-  $('.board').append(newTile.element);
-  for (var i=0; i<newTile.id; i++) {
-    //Check left neighbours
-    if (game.tiles[i].z===z &&
-        game.tiles[i].x===x-xd &&
-        y+yd>game.tiles[i].y &&
-        game.tiles[i].y>y-yd){
-      newTile.leftTiles[i] = game.tiles[i];
-      newTile.leftTiles.count++;
-      game.tiles[i].rightTiles[newTile.id] = newTile;
-      game.tiles[i].rightTiles.count++;
-    }
-    //Check right neighbours
-    if (game.tiles[i].z===z &&
-        game.tiles[i].x==x+xd &&
-        y+yd>game.tiles[i].y &&
-        game.tiles[i].y>y-yd){
-      newTile.rightTiles[i] = game.tiles[i];
-      newTile.rightTiles.count++;
-      game.tiles[i].leftTiles[newTile.id] = newTile;
-      game.tiles[i].leftTiles.count++;
-    }
-    //Check bottom neighbours
-    if (game.tiles[i].z===z-1 &&
-        x+xd>game.tiles[i].x &&
-        game.tiles[i].x>x-xd &&
-        y+yd>game.tiles[i].y &&
-        game.tiles[i].y>y-yd){
-      newTile.bottomTiles[i] = game.tiles[i];
-      newTile.bottomTiles.count++;
-      game.tiles[i].topTiles[newTile.id] = newTile;
-      game.tiles[i].topTiles.count++;
-    }
-  }
-  game.tiles.push(newTile);
-  return (newTile);
 };
 
 game.readSelectedLayout = function() {
@@ -436,7 +392,7 @@ game.readSelectedLayout = function() {
             type = Math.floor(Math.random()*tLength);
           } while (types[type]===0);
           types[type]--;
-          game.createTile(k, j, i, type);
+          new Tile(k, j, i, type);
           tileCount++;
         }
       }
@@ -482,21 +438,13 @@ game.updateTiles = function() {
   }
 };
 
-game.updateTileState = function(tile) {
-  if (tile.detach) {return;}
-  if ((tile.leftTiles.count>0 && tile.rightTiles.count>0) || tile.topTiles.count>0) {
-    tile.free = false;
-  } else {
-    tile.free = true;
-  }
-};
 
 game.updateFreeTiles = function() {
   var tileCount = game.tiles.length;
   var tile = {};
   for (var i=0; i<tileCount; i++) {
     tile = game.tiles[i];
-    game.updateTileState(tile);
+    tile.updateState();
   }
 };
 

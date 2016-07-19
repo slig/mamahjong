@@ -20,7 +20,6 @@ html, body {
 .header {
   height: 50px;
   background: rgb(172, 222, 247);
-  border-bottom: 3px solid rgb(91, 88, 255);
 }
 
 .header * {
@@ -31,6 +30,14 @@ html, body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.header .button {
+  transition: all 1s;
+}
+
+.header .button:hover {
+  text-decoration: underline;
 }
 
 .title {
@@ -46,6 +53,8 @@ html, body {
 .board {
   width: 100%;
   background: rgb(86, 186, 105);
+  background-image: url('../img/board_background.svg');
+  background-size: cover;
   overflow: hidden;
   position: absolute;
   top: 50px;
