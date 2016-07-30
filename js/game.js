@@ -426,7 +426,7 @@ game.updateTiles = function() {
   allTiles.css('height', (game.tileHeight*game.selectedLayout.tile_size[0]).toString() + 'px');
 
   game.borderThickness = game.tileWidth/3;
-  for (var i=0; i< this.tiles.length; i++) {
+  for (var i=0; i< game.tiles.length; i++) {
     game.tiles[i].element.css('background-image', 'url("' + game.selectedTileset.img + '")');
     game.tiles[i].element.css('left', (game.tileWidth*game.tiles[i].x-game.tiles[i].z*(game.borderThickness -1) + offsetLeft).toString() + 'px');
     game.tiles[i].element.css('top', (game.tileHeight*game.tiles[i].y-game.tiles[i].z*(game.borderThickness -1) + offsetTop).toString() + 'px');
@@ -568,6 +568,8 @@ $(document).ready(function(){
   $(window).on('resize', function() {
     game.updateTiles();
   });
+
+  window.onload = game.updateTiles;
 
   $('.newGame').click(game.newGame);
 
